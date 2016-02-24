@@ -22,7 +22,7 @@ function varargout = proyecto1(varargin)
 
 % Edit the above text to modify the response to help proyecto1
 
-% Last Modified by GUIDE v2.5 23-Feb-2016 21:42:23
+% Last Modified by GUIDE v2.5 24-Feb-2016 11:20:26
 
 % Begin initialization code - DO NOT EDIT
 gui_Singleton = 1;
@@ -150,18 +150,30 @@ function pushbutton1_Callback(hObject, eventdata, handles)
 % hObject    handle to pushbutton1 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    structure with handles and user data (see GUIDATA)
-  a=get(handles.edit1,'String');
-  a1=str2double(a);
-    p=get(handles.edit2,'String');
-    p1=str2double(p);
-    f=get(handles.edit3,'String');
-    f1=str2double(f);
-    x=0:0.01:7;
-    y=a1*sin(f1*x+p1);  
-        
-        axes(handles.axes1);
-        cla
-        plot(x,y);ylabel('Amplitud');xlabel('Tiempo');
+a=get(handles.edit1,'String');
+am=str2double(a);
+fr=get(handles.edit3,'String');
+frec=str2double(fr);
+tim=get(handles.edit4,'String');
+time=str2double(tim);
+
+
+fs=44100;
+
+t=0:1/fs:time;
+
+w=2*pi*frec*t;
+
+senhal=am*(sin(w));
+periodo=1/frec;
+el=['el periodo es' num2str(periodo)];
+frecuency=1/periodo;
+freb=['la frecuencia es ' num2str(frecuency)];
+set(handles.text5, 'String',el);
+set(handles.text7, 'String',freb);
+axes(handles.axes1);
+plot(t,senhal);ylabel('Amplitud');xlabel('Tiempo');
+
 
 
 % --- Executes during object creation, after setting all properties.
@@ -169,3 +181,26 @@ function text2_CreateFcn(hObject, eventdata, handles)
 % hObject    handle to text2 (see GCBO)
 % eventdata  reserved - to be defined in a future version of MATLAB
 % handles    empty - handles not created until after all CreateFcns called
+
+
+
+function edit4_Callback(hObject, eventdata, handles)
+% hObject    handle to edit4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    structure with handles and user data (see GUIDATA)
+
+% Hints: get(hObject,'String') returns contents of edit4 as text
+%        str2double(get(hObject,'String')) returns contents of edit4 as a double
+
+
+% --- Executes during object creation, after setting all properties.
+function edit4_CreateFcn(hObject, eventdata, handles)
+% hObject    handle to edit4 (see GCBO)
+% eventdata  reserved - to be defined in a future version of MATLAB
+% handles    empty - handles not created until after all CreateFcns called
+
+% Hint: edit controls usually have a white background on Windows.
+%       See ISPC and COMPUTER.
+if ispc && isequal(get(hObject,'BackgroundColor'), get(0,'defaultUicontrolBackgroundColor'))
+    set(hObject,'BackgroundColor','white');
+end
