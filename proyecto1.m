@@ -156,14 +156,9 @@ fr=get(handles.edit3,'String');
 frec=str2double(fr);
 tim=get(handles.edit4,'String');
 time=str2double(tim);
-
-
 fs=44100;
-
-t=0:1/fs:time;
-
+t=0:1/fs:1;
 w=2*pi*frec*t;
-
 senhal=am*(sin(w));
 periodo=1/frec;
 el=['el periodo es' num2str(periodo)];
